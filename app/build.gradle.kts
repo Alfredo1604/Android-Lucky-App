@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+
+    //Dagger Hilt
+    kotlin("kapt")
+    alias(libs.plugins.daggerHiltAndroid)
 }
 
 android {
@@ -37,6 +41,11 @@ android {
     buildFeatures{
         viewBinding = true
     }
+
+    // Allow references to generated code
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -44,6 +53,10 @@ dependencies {
     //Nav Component
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+
+    //Dagger Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
     //By Default
     implementation(libs.androidx.core.ktx)
